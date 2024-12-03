@@ -1,5 +1,6 @@
 ---
 layout: post
+mermaid: true
 title:  "Sketchpad, practice UI design and state management"
 ---
 
