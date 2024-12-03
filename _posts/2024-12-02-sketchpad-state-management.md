@@ -39,7 +39,7 @@ To ensure the code is well-organized, readable, and maintainable, I opted for an
 ###Design Approach
 To ensure the code is well-organized, readable, and maintainable, I opted for an object-oriented programming (OOP) approach. Below is the final class design for the project:
 
-
+```mermaid
 classDiagram
     class Shape {
         - color: str
@@ -124,3 +124,4 @@ classDiagram
     Rectangle <|-- Square
     Ellipse <|-- Circle
     Shape <|-- Group
+```
