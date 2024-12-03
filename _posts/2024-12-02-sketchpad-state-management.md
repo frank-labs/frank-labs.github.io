@@ -2,9 +2,11 @@
 layout: post
 title:  "Sketchpad, practice UI design and state management"
 ---
+
 In a Human-Computer Interface class, one of the assignments was to design a sketchpad. At the time, I completed most of the features, though not all. Looking back, it was an interesting task that allowed me to practice a variety of concepts, including object-oriented programming, state management, and exploring how we interact with applications. Recently, I revisited the project, completed all the features, and added some improvements based on my understanding. Here, I will document my thought process.
 
-###Requirements
+### Requirements
+
 Let’s begin by listing the key requirements for the sketchpad application:
 
 Drawing Tools:
@@ -28,7 +30,9 @@ Undo/Redo
 File Operations:
 
 Save/Load
-###Programming Language Choice
+
+### Programming Language Choice
+
 This project does not impose any restrictions on the programming language, so we are free to choose one that suits us. I have experience with Java, Python, and HTML/CSS/JavaScript. After some consideration, I decided to use Python because of the following reasons:
 
 Python's flexibility and simplicity make it well-suited for rapid development.
@@ -36,8 +40,10 @@ Tkinter, Python’s default GUI library, is lightweight and capable enough for t
 Design Approach
 To ensure the code is well-organized, readable, and maintainable, I opted for an object-oriented programming (OOP) approach. Below is the final class design for the project:
 
-###Design Approach
+### Design Approach
+
 To ensure the code is well-organized, readable, and maintainable, I opted for an object-oriented programming (OOP) approach. Below is the final class design for the project:
+
 
 ```mermaid
 classDiagram
