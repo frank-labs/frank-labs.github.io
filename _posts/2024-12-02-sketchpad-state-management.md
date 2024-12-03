@@ -9,27 +9,23 @@ In a Human-Computer Interface class, one of the assignments was to design a sket
 
 Let’s begin by listing the key requirements for the sketchpad application:
 
-Drawing Tools:
+1. Drawing Tools:
 
-Straight lines
-Rectangles and squares
-Ellipses and circles
-Scribbled freehand lines
-Open and closed polygons
-Editing Tools:
-
-Move
-Cut, copy, and paste
-Delete
-Object Management:
-
-Group/Ungroup
-State Management:
-
-Undo/Redo
-File Operations:
-
-Save/Load
+- Straight lines
+- Rectangles and squares
+- Ellipses and circles
+- Scribbled freehand lines
+- Polygons, including open and closed polygons
+2. Editing Tools:
+- Move
+- Cut, copy, and paste
+- Delete
+3. Object Management:
+- Group/Ungroup
+4. State Management:
+- Undo/Redo
+5. File Operations:
+- Save/Load
 
 ### Programming Language Choice
 
