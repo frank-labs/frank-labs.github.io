@@ -32,7 +32,53 @@ Tkinter, Python’s default GUI library, is lightweight and capable enough for t
 
 ### Class Design
 
-To ensure the code is well-organized, readable, and maintainable, I opted for an object-oriented programming (OOP) approach. Lets analyse the classes here, 1. circles and squares are a special case for Ellipses and Rectangles. 2. When draing circles there are two approaches here, first is start from the centre or origin O, and the distance mouse moves is the radius R, second is like drawing a square, and put the circle into the square, I like the second approach better, because it allow me to control the size better 3.When considering Serialization/Deserialization, for the  'regular' shapes like Straight lines, Rectangles, Ellipses they can be decided by two point, the starting point and ending point,(assuming when drawing Ellipse, we drawing this Ellipse inside the Rectangle our mouth defined).   for  the IrRegular Shapes(Freehand and Polygon), actually they are a series of points. we can determin the shape jsut by connecting all these points together.  4, as for  open Polygon and closed Polygon, do we need another property to judge? actually a closed polygon is just the ending point is the first point, while for open polygon, the ending point is diffrent from the first point. so we can decide by this. Tkinter have a  create_polygon function, but it can only draw closed polygon, so it is a bit confusing, and we wouldn't use it. 5. as for color, as for we only need line color, not the filling color, all shapes have one color property. So, the final class design is we have an overarching class [Shape] with property [color], a RegularShape class with the  Below is the final class design for the project:
+To ensure the code is well-organized, readable, and maintainable, I opted for an object-oriented programming (OOP) approach. Below is the analysis and final class design:
+
+#### Analysis of Classes
+
+1. **Circles and Squares as Special Cases**:  
+   Circles and squares are special cases of ellipses and rectangles, respectively. They share similar properties but are distinguished by additional constraints.
+
+2. **Approach for Drawing Circles**:  
+   There are two common approaches for drawing circles:
+   - **Start from the center (O)**: The mouse movement determines the radius (R).
+   - **Draw like a square**: The circle is drawn inside a square defined by the mouse movement.  
+     I prefer the second approach as it provides better control over the size of the circle.
+
+3. **Serialization/Deserialization**:  
+   - **Regular Shapes (Straight Lines, Rectangles, Ellipses)**:  
+     These shapes can be defined by two points: the starting point and the ending point. (For ellipses, we assume they are drawn inside a rectangle defined by these two points.)
+   - **Irregular Shapes (Freehand and Polygons)**:  
+     These shapes are defined by a series of points. The shape can be determined by connecting these points together.
+
+4. **Open vs. Closed Polygons**:  
+   Do we need an additional property to distinguish between them?  
+   - A **closed polygon** is one where the ending point is the same as the first point.  
+   - An **open polygon** is one where the ending point is different from the first point.  
+     Therefore, we can determine this based on the points alone.  
+     Note: Tkinter's `create_polygon` function only supports closed polygons, which can be confusing. For this reason, we avoid using it.
+
+5. **Color Property**:  
+   Since we only need the line color (not the fill color), all shapes have a single `color` property.
+
+#### Final Class Design
+
+Based on the above considerations, we define the following class hierarchy for the project:
+
+- **`Shape`** (Base Class):  
+  - Property: `color`  
+  - This is the overarching class for all shapes.
+
+- **`RegularShape`** (Derived Class for Regular Shapes):  
+  - Handles shapes like straight lines, rectangles, and ellipses.  
+  - Defined by two points (start and end).
+
+- **`IrregularShape`** (Derived Class for Irregular Shapes):  
+  - Handles shapes like freehand drawings and polygons.  
+  - Defined by a series of points.
+
+By following this design, the code remains modular, flexible, and easy to extend for future enhancements.
+
 
 
 ```mermaid
