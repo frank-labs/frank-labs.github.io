@@ -169,3 +169,5 @@ For a single mouse button, there are three main events in Tinker Canvas:
 To distinguish between a click and a drag, we cannot judge this solely from the `button down` event, since they are all the same at that point. The method is to judge during the `mouse move while button down` event (`<B1-Motion>`). We set a small threshold: if the mouse moves more than the threshold, we consider it a drag. If the movement is less (accounting for shaky hands in a normal click), we consider it a click.
 
 From StackOverflow, I learned that this is the way Windows handles the distinction between a click and a drag.
+
+#### To be continued
