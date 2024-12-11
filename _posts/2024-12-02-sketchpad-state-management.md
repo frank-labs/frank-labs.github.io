@@ -124,41 +124,48 @@ classDiagram
 
 ### Beheivior Design
 
-It's easy to draw shapes on a canvas, since tinker  already has some of these methods. But it is another thing to dig deeper. I'll try to list the considerations here.
+Drawing shapes on a canvas is straightforward, as Tinker already has some built-in methods for it. However, there are some deeper considerations that need to be addressed. Below, I will list these key points.
 
-1. open and closed polygon.
+#### 1. Open and Closed Polygons
 
-tinker canvas have a built-in draw polygon method, but it can only draw closed polygon. An open polygon is in fact a few lines connected together. and in fact tinker canvas support this approach. we can use drawline method to draw open polygons. on a further thought, if the last point == the first point, it would be a closed polygon. so we will use drawline to draw both closed and open polygon.
+Tinker Canvas has a built-in method for drawing polygons, but it only supports closed polygons. An open polygon, on the other hand, is essentially a series of connected lines. Fortunately, Tinker Canvas supports this approach. We can use the `drawline` method to draw open polygons.
 
-How to draw.
-to give user a clear view of the current drawing line, we use a preview dotted line. when user clicked and while mouse moving, this line will show to give a guidence.
-How to close: 1 if the mouse clicks near the first point, we will assume that the user want to close this polygon. and snaps to close this polygon.
-2. if user want to draw open polygon, he will need to click right button to indicate the last point. then it will be a closed polygon.
-3 if user change mode (to other shapes or editing tools) during drawing, the polygon will be open. and the last point will be the clicked point before changing mode.
+**Key observation:**  
+If the last point is the same as the first point, the polygon becomes a closed one. Therefore, we can use the `drawline` method to handle both closed and open polygons.
 
-2.select/moving mode
-The simplist way is to have a move button, and when in this mode, mouse drag on shapes to move.
-but it is usually not how we interact with a app.
-Here I added some behivor features based on how we use file exploer to select/move files
-1.single click to select, drag to move
-2. if Ctrl is pressed, can select multiple files.
-3, if mutiple shapes are selected, 
-        1.click on one of then will de-select others(only the current is selected), click on blank space will de-select all. 
-        2. drag on one will move them all.(I tested this on file exploer)
-4. if Ctrl is pressed and mutiple shapes are selected, 
-    1. click a shape will change the select status (click on selected will de-select it, click on un-selected will select it)
-    2. drag on one will move them all.(I tested this on file exploer)
+##### How to Draw:
+To give users a clear view of the current drawing line, we use a preview dotted line. When the user clicks and moves the mouse, this line will be shown to provide guidance.
 
-This is the hardest part, if you look at the code, I used many if else to decide the code flow.
+##### How to Close:
+1. If the mouse clicks near the first point, we will assume that the user wants to close the polygon. The system will snap to close the polygon.
+2. If the user wants to draw an open polygon, they need to right-click to indicate the last point. This will then close the polygon.
+3. If the user switches modes (to other shapes or editing tools) during the drawing, the polygon will remain open, and the last point will be the clicked point before switching modes.
 
-3. how to know if an action is a click or a drag.
-for one mouse button, there are three event. in tinker, they are:
+#### 2. Select/Moving Mode
 
-button down <Button-1>
-moude move while button down<B1-Motion>
-button up <ButtonRelease-1>
+The simplest approach is to have a move button, and when in this mode, the user can drag shapes to move them. However, this isn't how users typically interact with apps.
 
-whether a user actoin is a drag or a click, we can not judge on button down event, since they are all the same, 
-the method is to judge during moude move while button down event<B1-Motion>.  we set a small threshold, if the mouse move more than the threshold, we consider it a drag, if not(normal click might have some shaky hands), we consider it a click.
-From stackoverflow, I learned this this is how windows handle it.
+Based on how we interact with a file explorer, I added the following behavior features:
 
+1. Single-click to select, drag to move.
+2. Ctrl + Click to select multiple shapes.
+3. If multiple shapes are selected:
+   - Clicking on one of them will deselect the others (only the currently clicked shape remains selected). Clicking on a blank space will deselect all shapes.
+   - Dragging on one selected shape will move all selected shapes (similar to how file explorers behave).
+4. If **Ctrl** is pressed and multiple shapes are selected:
+   - Clicking on a shape will toggle its selection status (clicking on a selected shape will deselect it, and clicking on an unselected shape will select it).
+   - Dragging one selected shape will move them all (again, similar to how file explorers behave).
+
+This part is the most complex, and as you can see from the code, I used many `if`/`else` statements to decide the flow of actions.
+
+#### 3. How to Distinguish Between a Click and a Drag
+
+For a single mouse button, there are three main events in Tinker Canvas:
+
+- `Button down <Button-1>`
+- `Mouse move while button down <B1-Motion>`
+- `Button up <ButtonRelease-1>`
+
+To distinguish between a click and a drag, we cannot judge this solely from the `button down` event, since they are all the same at that point. The method is to judge during the `mouse move while button down` event (`<B1-Motion>`). We set a small threshold: if the mouse moves more than the threshold, we consider it a drag. If the movement is less (accounting for shaky hands in a normal click), we consider it a click.
+
+From StackOverflow, I learned that this is the way Windows handles the distinction between a click and a drag.
